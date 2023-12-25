@@ -1,12 +1,12 @@
 export interface Deal {
-  id: string;
-  product_name: string;
+  id: number;
+  deal_title: string;
   is_price: string;
   was_price: string;
-  code: string;
-  store_name: string;
-  deal_link: string;
-  date: string;
+  discount_code?: string;
+  seller_name: string;
+  link_to_deal: string;
+  createdAt: string;
   short_offer: string;
-  images: string[];
+  image: string;
 }

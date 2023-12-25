@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
   return (
     <Card
       className="relative flex flex-col"
-      aria-label={`Deal on ${data.product_name}`}
+      aria-label={`Deal on ${data.deal_title}`}
     >
       {/* Conditional rendering for Discount Overlay */}
       {data.short_offer && (
@@ -27,17 +27,15 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         {/* Date */}
         <div className="flex justify-end pt-4 pr-4">
           <p className="antialiased text-xs text-muted-foreground">
-            {data.date}
+            {data.createdAt ? data.createdAt.toLocaleDateString() : "N/A"}
           </p>
         </div>
         {/* Image */}
         <div className="py-2 flex justify-center">
           <Image
-            src={data.images?.[0]}
+            src={data.image}
             alt={
-              data.product_name
-                ? `Image of ${data.product_name}`
-                : "Product image"
+              data.deal_title ? `Image of ${data.deal_title}` : "Product image"
             }
             width={200}
             height={200}
@@ -46,34 +44,39 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         </div>
         {/* Description */}
         <div className="px-4 py-1">
-          <p className="font-semibold antialiased text-sm">
-            {data.product_name}
-          </p>
+          <p className="font-semibold antialiased text-sm">{data.deal_title}</p>
           <p className="antialiased text-green-600 font-semibold mt-2 text-lg">
             {data.is_price}
           </p>
           <p className="antialiased text-slate-400 font-semibold text-sm">
-            Was {data.was_price}
+            {data.was_price}
           </p>
         </div>
       </div>
 
       {/* Promo Code */}
-      {data.code && (
+      {data.discount_code && (
         <div className="px-4 mt-4 flex flex-col items-start">
           <p className="text-xs font-semibold dark:text-gray-300">
             Use code at checkout:
           </p>
           <div className="mt-2 bg-gray-200 dark:bg-gray-700 rounded px-4 py-1">
-            <p className="text-xs select-all dark:text-white">{data.code}</p>
+            <p className="text-xs select-all dark:text-white">
+              {data.discount_code}
+            </p>
           </div>
         </div>
       )}
 
       {/* Store Name and Grab Deal Button */}
       <div className="flex justify-between items-end px-4 py-4">
-        <p className="antialiased text-xs text-gray-600">{data.store_name}</p>
-        <Link href={data.deal_link} passHref>
+        <p className="antialiased text-xs text-gray-600">{data.seller_name}</p>
+        <Link
+          href={data.link_to_deal}
+          passHref
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Button>Grab Deal</Button>
         </Link>
       </div>
