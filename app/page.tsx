@@ -1,14 +1,12 @@
 import Container from "@/components/ui/container";
-import ProductList from "@/components/ProductList";
-import prisma from "@/lib/prisma";
+import { ProductList } from "@/components/ProductList";
 
-export default async function CardsPage() {
-  const deals = await prisma.deal.findMany({
-    orderBy: {
-      createdAt: "desc", // This sorts the deals by their creation date, newest first
-    },
-  });
+export type PageProps = {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
+export default function CardsPage(props: PageProps) {
   return (
     <div>
       <Container>
@@ -32,7 +30,7 @@ export default async function CardsPage() {
           </div>
 
           <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-            <ProductList items={deals} />
+            <ProductList {...props} />
           </div>
         </div>
       </Container>
