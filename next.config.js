@@ -1,4 +1,7 @@
-module.exports = {
+const { withContentlayer } = require("next-contentlayer");
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -22,5 +25,6 @@ module.exports = {
       // You can add more patterns here if you have images from other domains
     ],
   },
-  // ... any other existing configuration
 };
+
+module.exports = withContentlayer(nextConfig);
