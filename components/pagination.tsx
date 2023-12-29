@@ -39,7 +39,7 @@ export const Pagination = (props: PaginationProps) => {
   const pages = getPagesToShow();
 
   return (
-    <div className="flex items-center justify-center space-x-6 text-black mt-5">
+    <div className="flex items-center justify-center space-x-6 text-black mt-10">
       <Link
         className={cn(
           "rounded-md border border-gray-300 px-3 py-2 text-sm font-medium hover:bg-gray-50",

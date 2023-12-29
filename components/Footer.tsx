@@ -26,37 +26,6 @@ export function Footer() {
             <p className="max-w-xs text-sm text-gray-500">
               Your One-Stop Destinatation for the Best Deals on Gift Cards!
             </p>
-            {/* <div className="flex items-center space-x-2">
-              <a
-                href="https://twitter.com/dubdotco"
-                target="_blank"
-                rel="noreferrer"
-                className="group rounded-md p-2 transition-colors hover:bg-gray-100 active:bg-gray-200"
-              >
-                <span className="sr-only">Twitter</span>
-                <TwitterLogoIcon className="h-5 w-5 text-gray-600" />
-              </a>
-              <div className="h-8 border-l border-gray-200" />
-              <a
-                href="https://github.com/dubinc/dub"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md p-2 transition-colors hover:bg-gray-100 active:bg-gray-200"
-              >
-                <span className="sr-only">Github</span>
-                <GitHubLogoIcon className="h-5 w-5 text-gray-600" />
-              </a>
-              <div className="h-8 border-l border-gray-200" />
-              <a
-                href="https://www.linkedin.com/company/dubhq/"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md p-2 transition-colors hover:bg-gray-100 active:bg-gray-200"
-              >
-                <span className="sr-only">LinkedIn</span>
-                <LinkedInLogoIcon className="h-5 w-5" fill="#52525B" />
-              </a>
-            </div> */}
           </div>
           <div className="mt-16 grid grid-cols-2 gap-4 xl:col-span-2 xl:mt-0">
             <div>
