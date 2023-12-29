@@ -26,30 +26,34 @@ export function NavMobile() {
         <button
           onClick={() => setOpen(!open)}
           className={cn(
-            "absolute right-3 top-3 z-40 rounded-full p-2 transition-colors duration-200 hover:bg-gray-200 focus:outline-none active:bg-gray-300 lg:hidden",
-            open && "hover:bg-gray-100 active:bg-gray-200"
+            "absolute right-3 top-3 z-40 rounded-full p-2 transition-colors duration-200 focus:outline-none lg:hidden",
+            open
+              ? "hover:bg-accent active:bg-accent"
+              : "hover:bg-secondary active:bg-muted",
+            "bg-card text-foreground"
           )}
         >
           {open ? (
-            <Cross2Icon className="h-5 w-5 text-gray-600" />
+            <Cross2Icon className="h-5 w-5" />
           ) : (
-            <HamburgerMenuIcon className="h-5 w-5 text-gray-600" />
+            <HamburgerMenuIcon className="h-5 w-5" />
           )}
         </button>
         <nav
           className={cn(
-            "fixed inset-0 z-20 hidden w-full bg-white px-5 py-16 lg:hidden overflow-y-auto",
-            open && "block"
+            "fixed inset-0 z-20 hidden w-full px-5 py-16 lg:hidden overflow-y-auto",
+            open && "block",
+            "bg-background"
           )}
           style={{ maxHeight: "33vh" }}
         >
-          <ul className="grid divide-y divide-gray-200">
+          <ul className="grid divide-y divide-border">
             {navItems.map(({ name, slug }) => (
               <li key={slug} className="py-3">
                 <Link
                   href={`/${slug}`}
                   onClick={() => setOpen(false)}
-                  className="flex w-full font-semibold capitalize"
+                  className="flex w-full font-semibold capitalize text-foreground"
                 >
                   {name}
                 </Link>

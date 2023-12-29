@@ -23,8 +23,8 @@ export default async function DocPage({ params }: DocPageProps) {
   const doc = await getDocFromParams(params.slug);
 
   return (
-    <main className="bg-gray-50">
-      <div className="bg-white py-20 sm:py-40">
+    <main className="bg-background">
+      <div className="bg-card py-20 sm:py-40">
         <DocsPageHeader heading={doc.title} />
       </div>
       <div className="mx-auto w-full lg:px-20 flex max-w-screen-md flex-col items-center p-10 sm:pt-20">
