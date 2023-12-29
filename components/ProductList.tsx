@@ -1,5 +1,4 @@
 import ProductCard from "@/components/ui/ProductCard";
-import { Deal } from "@/types/index";
 import prisma from "@/lib/prisma";
 import { PageProps } from "@/app/page";
 import { Pagination } from "./pagination";
