@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card } from "@/components/ui/card";
-import { Deal } from "@/types";
+import { Deal } from "@/types/index";
 import { Button } from "@/components/ui/button";
 
 interface ProductCard {
