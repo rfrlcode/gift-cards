@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import { NavMobile } from "@/components/NavMobile";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -47,7 +46,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Nav />
-          <NavMobile />
+
           {children}
           <Footer />
         </ThemeProvider>

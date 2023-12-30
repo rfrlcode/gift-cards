@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import Container from "./ui/container";
+import { useTheme } from "next-themes";
+import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import { Button } from "./ui/button";
 
 const navigation = {
   more: [
@@ -14,6 +19,7 @@ const navigation = {
 };
 
 export function Footer() {
+  const { theme, setTheme } = useTheme();
   return (
     <Container>
       <footer className="z-10 border-t border-border bg-background/50 py-8 backdrop-blur-lg">
@@ -73,13 +79,23 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-border pt-8">
+        <div className="flex flex-row justify-between items-center mt-10 border-t border-border pt-8">
           <p
             className="text-sm leading-5"
             style={{ color: "var(--muted-foreground)" }}
           >
             © {new Date().getFullYear()} GiftCardDeals.xyz
           </p>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Toggle Theme"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <MoonIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle Theme</span>
+          </Button>
         </div>
       </footer>
     </Container>

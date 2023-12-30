@@ -23,13 +23,13 @@ export default function CardsPage(props: PageProps) {
               </div>
             </div>
           </div>
-          <div className="gap-y-8 px-4 sm:px-6 lg:px-8">
+          <div className="gap-y-8">
             <p className="text-black-500 md:text-xl dark:text-gray-400 text-left">
               <span className="border-b-2">Latest Deals</span>
             </p>
           </div>
 
-          <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-y-8 ">
             <ProductList {...props} />
           </div>
         </div>

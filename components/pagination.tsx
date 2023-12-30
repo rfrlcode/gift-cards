@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 
 type PaginationProps = {
   page?: string;
@@ -10,19 +10,17 @@ type PaginationProps = {
 
 export const Pagination = (props: PaginationProps) => {
   const { page = 1, totalPages, hasNextPage } = props;
-
   const currentPage = Math.min(Math.max(Number(page), 1), totalPages);
 
-  const getPagesToShow = () => {
+  // Memoized getPagesToShow function
+  const pages = useMemo(() => {
     let startPage = Math.max(currentPage - 2, 1);
     let endPage = Math.min(currentPage + 2, totalPages);
 
-    // Adjust for cases where totalPages is less than 5
     if (totalPages < 5) {
       startPage = 1;
       endPage = totalPages;
     } else {
-      // Adjust start and end page if they are near the beginning or end
       if (currentPage <= 3) {
         endPage = 5;
       } else if (currentPage >= totalPages - 2) {
@@ -34,9 +32,7 @@ export const Pagination = (props: PaginationProps) => {
       { length: endPage - startPage + 1 },
       (_, i) => startPage + i
     );
-  };
-
-  const pages = getPagesToShow();
+  }, [currentPage, totalPages]); // Only recalculate when currentPage or totalPages changes
 
   return (
     <div
