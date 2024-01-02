@@ -1,16 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import Container from "./ui/container";
 import Image from "next/image";
-// import { useTheme } from "next-themes";
-// import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
-// import { Button } from "./ui/button";
-
-import LogoType from "@/components/LogoType";
+import { CommandMenu } from "@/components/search";
 
 export const navItems = [
   {
@@ -21,7 +16,6 @@ export const navItems = [
 
 export function Nav() {
   const selectedLayout = useSelectedLayoutSegment();
-  // const { theme, setTheme } = useTheme();
 
   return (
     <Container>
@@ -59,19 +53,8 @@ export function Nav() {
 
               <NavigationMenuPrimitive.Viewport className="data-[state=closed]:animate-scale-out-content data-[state=open]:animate-scale-in-content absolute left-0 top-full flex w-[var(--radix-navigation-menu-viewport-width)] origin-[top_center] justify-start rounded-lg border border-border bg-background shadow-lg" />
             </NavigationMenuPrimitive.Root>
-
-            {/* <Button
-              variant="ghost"
-              size="icon"
-              className="mr-6 mt-5"
-              aria-label="Toggle Theme"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <MoonIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle Theme</span>
-            </Button> */}
           </div>
+          <div>{/* <CommandMenu /> */}</div>
         </div>
       </div>
     </Container>

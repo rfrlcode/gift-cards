@@ -36,7 +36,7 @@ export const Pagination = (props: PaginationProps) => {
 
   return (
     <div
-      className="flex items-center justify-center space-x-6 mt-10"
+      className="flex items-center justify-center md:space-x-6 mt-10 space-x-3"
       style={{ color: "var(--foreground)" }}
     >
       <Link
