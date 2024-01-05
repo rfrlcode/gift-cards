@@ -20,8 +20,6 @@ const fetchDeals = async ({ take = PAGE_SIZE, skip = 0 }) => {
 
   const total = await prisma.deal.count();
 
-  revalidatePath("/");
-
   return {
     data: results,
     metadata: {
