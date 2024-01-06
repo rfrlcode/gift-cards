@@ -32,52 +32,9 @@ export const Page = defineDocumentType(() => ({
   computedFields,
 }));
 
-// Define the Deal document type
-export const Deal = defineDocumentType(() => ({
-  name: "Deal",
-  filePathPattern: `deals/**/*.mdx`, // You can change this pattern as needed
-  contentType: "mdx",
-  fields: {
-    id: {
-      type: "number",
-      required: true, // Set to true if id is mandatory
-    },
-    deal_title: {
-      type: "string",
-      required: true,
-    },
-    is_price: {
-      type: "string",
-      required: true,
-    },
-    was_price: {
-      type: "string",
-    },
-    discount_code: {
-      type: "string",
-    },
-    seller_name: {
-      type: "string",
-    },
-    link_to_deal: {
-      type: "string",
-      required: true,
-    },
-    createdAt: {
-      type: "date",
-    },
-    short_offer: {
-      type: "string",
-    },
-    image: {
-      type: "string",
-    },
-  },
-}));
-
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Page, Deal],
+  documentTypes: [Page],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
