@@ -1,38 +1,51 @@
-import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import React from "react";
+import { cn } from "@/lib/utils";
 
-type PaginationProps = {
-  page?: string;
+export interface PaginationProps {
   totalPages: number;
-  hasNextPage: boolean;
-};
+  currentPage: number;
+}
 
-export const Pagination = (props: PaginationProps) => {
-  const { page = 1, totalPages, hasNextPage } = props;
-  const currentPage = Math.min(Math.max(Number(page), 1), totalPages);
+export default function Pagination({
+  totalPages,
+  currentPage,
+}: PaginationProps) {
+  const pathname = usePathname();
+  // Remove leading and trailing slashes, then split
+  const pathSegments = pathname.replace(/^\/|\/$/g, "").split("/");
+  const basePath = pathSegments[0] === "page" ? "" : `/${pathSegments[0]}`;
 
-  // Memoized getPagesToShow function
-  const pages = useMemo(() => {
-    let startPage = Math.max(currentPage - 2, 1);
-    let endPage = Math.min(currentPage + 2, totalPages);
+  const prevPage = currentPage - 1 > 0;
+  const nextPage = currentPage + 1 <= totalPages;
 
-    if (totalPages < 5) {
-      startPage = 1;
-      endPage = totalPages;
+  const getHref = (page: number) => {
+    // Check if we are at the root ('/')
+    if (pathname === "/") {
+      return page === 1 ? "/" : `/page/${page}`;
     } else {
-      if (currentPage <= 3) {
-        endPage = 5;
-      } else if (currentPage >= totalPages - 2) {
-        startPage = totalPages - 4;
-      }
+      return page === 1 ? `${basePath}/` : `${basePath}/page/${page}`;
     }
+  };
 
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i
-    );
-  }, [currentPage, totalPages]); // Only recalculate when currentPage or totalPages changes
+  // Calculate pages to show
+  let startPage = Math.max(currentPage - 2, 1);
+  let endPage = Math.min(currentPage + 2, totalPages);
+  if (totalPages < 5) {
+    startPage = 1;
+    endPage = totalPages;
+  } else {
+    if (currentPage <= 3) {
+      endPage = 5;
+    } else if (currentPage >= totalPages - 2) {
+      startPage = totalPages - 4;
+    }
+  }
+  const pages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
 
   return (
     <div
@@ -44,7 +57,7 @@ export const Pagination = (props: PaginationProps) => {
           "rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary",
           currentPage === 1 ? "pointer-events-none bg-muted" : ""
         )}
-        href={`?page=${currentPage - 1}`}
+        href={getHref(currentPage - 1)}
       >
         Previous
       </Link>
@@ -53,16 +66,16 @@ export const Pagination = (props: PaginationProps) => {
         aria-label="Pagination"
         className="relative z-0 inline-flex -space-x-px rounded-md"
       >
-        {pages.map((p, i) => (
+        {pages.map((p) => (
           <Link
             key={p}
             className={cn(
               "relative inline-flex items-center border border-border px-4 py-2 text-sm font-medium hover:bg-secondary",
               p === currentPage ? "pointer-events-none bg-muted" : "",
-              i === 0 ? "rounded-l-md" : "",
-              i === pages.length - 1 ? "rounded-r-md" : ""
+              p === startPage ? "rounded-l-md" : "",
+              p === endPage ? "rounded-r-md" : ""
             )}
-            href={`?page=${p}`}
+            href={getHref(p)}
           >
             {p}
           </Link>
@@ -72,12 +85,12 @@ export const Pagination = (props: PaginationProps) => {
       <Link
         className={cn(
           "rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary",
-          !hasNextPage ? "pointer-events-none bg-muted" : ""
+          currentPage >= totalPages ? "pointer-events-none bg-muted" : ""
         )}
-        href={`?page=${currentPage + 1}`}
+        href={getHref(currentPage + 1)}
       >
         Next
       </Link>
     </div>
   );
-};
+}

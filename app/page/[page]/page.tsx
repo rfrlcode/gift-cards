@@ -5,10 +5,28 @@ import { fetchDeals } from "@/lib/utils";
 const DEALS_PER_PAGE = 12; // Set the number of deals per page
 export const revalidate = 10800; // revalidate the data at most every hour
 
-export default async function HomePage() {
+async function fetchDealsData() {
+  // Fetching and sorting deals
+  const allDeals = await fetchDeals();
+  return allDeals;
+}
+
+// This function gets called at build time
+
+export const generateStaticParams = async () => {
+  const allDeals = await fetchDealsData(); // Ensure you have the deals data before proceeding
+  const totalPages = Math.ceil(allDeals.length / DEALS_PER_PAGE);
+  const paths = Array.from({ length: totalPages }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+
+  return paths;
+};
+
+export default async function Page({ params }: { params: { page: string } }) {
   // Assuming allDeals is your array of deals. Sort them if necessary
   const sortedDeals = await fetchDeals(); // Replace with sortDeals(allDeals) if you have a sorting function
-  const pageNumber = 1; // Set the current page number. This might come from router query in a real scenario
+  const pageNumber = parseInt(params.page as string); // Set the current page number. This might come from router query in a real scenario
 
   // Calculate the subset of deals to be displayed on the current page
   const initialDisplayDeals = sortedDeals.slice(
@@ -21,7 +39,6 @@ export default async function HomePage() {
     currentPage: pageNumber,
     totalPages: Math.ceil(sortedDeals.length / DEALS_PER_PAGE),
   };
-
   return (
     <div>
       <Container>
