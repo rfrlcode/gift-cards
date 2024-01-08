@@ -65,7 +65,7 @@ export function CommandMenu({ brands }: CommandMenuProps) {
         <CommandInput placeholder="Search" />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Links">
+          <CommandGroup heading="Brands">
             {brands.map((navItem) => (
               <CommandItem
                 key={navItem.href}
