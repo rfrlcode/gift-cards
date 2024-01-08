@@ -5,7 +5,7 @@ import Pagination from "@/components/pagination";
 import React from "react";
 import { PaginationProps } from "@/components/pagination";
 
-interface ListLayoutProps {
+interface ProductListProps {
   posts: any[]; // Adjust the type according to your data structure
   initialDisplayPosts?: any[];
   pagination?: PaginationProps;
@@ -15,7 +15,7 @@ export default function ProductList({
   posts,
   initialDisplayPosts = [],
   pagination,
-}: ListLayoutProps) {
+}: ProductListProps) {
   const displayPosts =
     initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 

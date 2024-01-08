@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import Head from "next/head";
+import { fetchUniqueDealTitles } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,17 +29,20 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
 };
+export const revalidate = 10800; // revalidate the data at most every hour
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const brandNames = await fetchUniqueDealTitles();
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Nav />
+          <Nav brands={brandNames} />
 
           {children}
           <Footer />

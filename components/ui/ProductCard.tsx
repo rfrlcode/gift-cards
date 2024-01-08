@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         {/* Date */}
         <div className="flex justify-end pt-4 pr-4">
           <p className="antialiased text-xs text-muted-foreground">
-            {/* {data.createdAt ? data.createdAt.toLocaleDateString() : "N/A"} */}
+            {data.createdAt ? data.createdAt.toLocaleDateString() : "N/A"}
           </p>
         </div>
         {/* Image */}

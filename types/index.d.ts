@@ -12,7 +12,7 @@ export interface Deal {
   discount_code?: string;
   seller_name?: string | undefined;
   link_to_deal: string;
-  createdAt?: Date | string;
+  createdAt?: Date;
   short_offer?: string | undefined;
   image?: string;
 }
