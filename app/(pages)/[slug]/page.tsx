@@ -35,7 +35,7 @@ async function generateMetadata(slug: string): Promise<Metadata> {
 
 export async function generateStaticParams() {
   return allPages.map((doc) => ({
-    params: { slug: doc.slugAsParams },
+    slug: doc.slugAsParams,
   }));
 }
 
