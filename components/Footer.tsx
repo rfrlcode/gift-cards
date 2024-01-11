@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 const navigation = {
   more: [
     { name: "Who we are", href: "/about" },
+    { name: "Blog", href: "/blog" },
     { name: "Affiliate Disclosure", href: "/affiliate-disclosure" },
   ],
   legal: [

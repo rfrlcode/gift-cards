@@ -13,7 +13,10 @@ export const navItems = [
     name: "About Us",
     slug: "about",
   },
-  // ... other items
+  {
+    name: "Blog",
+    slug: "blog",
+  },
 ];
 
 interface NavProps {
