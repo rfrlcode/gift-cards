@@ -37,13 +37,13 @@ export default function BlogHomePage() {
               </div>
             </div>
           </div>
-          <div className="gap-y-8">
+          <div className="">
             <p className="text-black-500 md:text-xl dark:text-gray-400 text-left">
               <span className="border-b-2">Blog Posts</span>
             </p>
           </div>
 
-          <div className="flex flex-col gap-y-8 ">
+          <div className="flex flex-col">
             <BlogList
               posts={sortedPosts}
               initialDisplayPosts={initialDisplayDeals}
