@@ -28,6 +28,12 @@ const nextConfig = {
         port: "", // Specify the port if required, otherwise leave it as an empty string
         pathname: "/**", // This will allow all paths from this domain
       },
+      {
+        protocol: "https",
+        hostname: "media.licdn.com",
+        port: "", // Specify the port if required, otherwise leave it as an empty string
+        pathname: "/**", // This will allow all paths from this domain
+      },
       // You can add more patterns here if you have images from other domains
     ],
   },
