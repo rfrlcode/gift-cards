@@ -16,3 +16,13 @@ export interface Deal {
   short_offer?: string | undefined;
   image?: string;
 }
+
+export interface SiteMetadata {
+  title: string;
+  author: string;
+  headerTitle: string;
+  description: string;
+  language: string;
+  siteUrl: string;
+  locale: string;
+}
