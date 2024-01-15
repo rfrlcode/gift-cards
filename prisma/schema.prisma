@@ -15,6 +15,7 @@ model Deal {
   was_price     String
   discount_code String
   seller_name   String
+  brand_name    String
   link_to_deal  String
   short_offer   String
   image         String
