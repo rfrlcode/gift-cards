@@ -20,7 +20,7 @@ export const navItems = [
 ];
 
 interface NavProps {
-  brands: { title: string; image: string }[];
+  brands: { title: string; image: string; brandName: string }[];
 }
 
 export function Nav({ brands }: NavProps) {
@@ -39,7 +39,7 @@ export function Nav({ brands }: NavProps) {
         const cleanedTitle = brand.title.replace("GiftCard", "").trim();
         return {
           title: cleanedTitle,
-          href: `/brands/${cleanedTitle.replace(/\s/g, "-")}`,
+          href: `/brands/${brand.brandName}`,
         };
       }),
     [brands]

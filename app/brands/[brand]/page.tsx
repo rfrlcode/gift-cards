@@ -1,78 +1,71 @@
+import Image from "next/image";
+
+import { columns } from "@/components/tasks/components/columns";
+import { DataTable } from "@/components/tasks/components/data-table";
 import Container from "@/components/ui/container";
-import ProductList from "@/components/ProductList";
 import { fetchDeals } from "@/lib/utils";
 import { fetchUniqueDealTitles } from "@/lib/utils";
 
-const DEALS_PER_PAGE = 12; // Set the number of deals per page
 export const revalidate = 10800; // revalidate the data at most every hour
 
 export const generateStaticParams = async () => {
   const allBrands = await fetchUniqueDealTitles(); // Fetch all unique deal titles
-
-  // Map over allBrands to create the paths array
-  const paths = allBrands.map((brand) => {
-    const cleanedTitle = brand.title.replace("GiftCard", "").trim();
-    return {
-      brand: cleanedTitle.replace(/\s/g, "-"),
-    };
-  });
-
-  return paths;
+  return allBrands.map((brand) => ({ brand: brand.brandName }));
 };
 
 export default async function Page({ params }: { params: { brand: string } }) {
-  // Assuming allDeals is your array of deals. Sort them if necessary
-  const brandName = params.brand;
+  const { brand: brandName } = params;
   const allDeals = await fetchDeals();
 
   // Filter deals for the given brand
   const brandDeals = allDeals.filter((deal) =>
-    deal.deal_title.toLowerCase().includes(brandName.toLowerCase())
+    deal.brand_name.includes(brandName)
   );
 
-  const pageNumber = 1; // Assuming you're starting with page 1
-  const initialDisplayDeals = brandDeals.slice(
-    DEALS_PER_PAGE * (pageNumber - 1),
-    DEALS_PER_PAGE * pageNumber
-  );
+  // Get the image from the first deal, if available
+  const firstDealImage =
+    brandDeals.length > 0 ? brandDeals[0].image : "/public/logo.svg";
 
-  // Calculate pagination details based on filtered deals
-  const pagination = {
-    currentPage: pageNumber,
-    totalPages: Math.ceil(brandDeals.length / DEALS_PER_PAGE),
-  };
+  const brandTitle =
+    brandDeals.length > 0
+      ? brandDeals[0].deal_title.replace("GiftCard", "").trim()
+      : "Test";
 
   return (
-    <div>
-      <Container>
-        <div className="space-y-10 pb-10">
-          <div className="container px-4 md:px-6 mt-10">
-            <div className="flex flex-col items-center space-y-4 text-center">
+    <Container>
+      <div className="space-y-10 pb-10">
+        <div className="mt-10">
+          <div className="flex flex-col space-y-5">
+            <Image
+              src={firstDealImage}
+              alt={`Image of ${brandTitle} gift card`}
+              width={200}
+              height={200}
+              className="rounded-lg border-2"
+            />
+            <div className="flex flex-col space-y-4 justify-start items-start">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  GiftCardDeals
+                  {brandTitle}
                 </h1>
                 <h2 className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Your One-Stop Destination for the Best Deals on Gift Cards!
+                  Find the best deals on {brandTitle} gift-cards!
                 </h2>
               </div>
             </div>
           </div>
-          <div className="gap-y-8">
-            <p className="text-black-500 md:text-xl dark:text-gray-400 text-left">
-              <span className="border-b-2">Latest Deals</span>
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-y-8 ">
-            <ProductList
-              posts={brandDeals}
-              initialDisplayPosts={initialDisplayDeals}
-              pagination={pagination}
-            />
+        </div>
+      </div>
+      <div className="h-full flex-1 flex-col space-y-2 md:flex">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">Latest Deals</h2>
           </div>
         </div>
-      </Container>
-    </div>
+        <div className="max-w-xl">
+          <DataTable data={brandDeals} columns={columns} />
+        </div>
+      </div>
+    </Container>
   );
 }

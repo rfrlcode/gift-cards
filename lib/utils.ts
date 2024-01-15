@@ -18,10 +18,11 @@ export const fetchDeals = cache(async () => {
 
 export const fetchUniqueDealTitles = cache(async () => {
   const deals = await prisma.deal.findMany({
-    distinct: ["deal_title"],
+    distinct: ["brand_name"],
     select: {
       deal_title: true,
-      image: true, // Include the image field
+      image: true,
+      brand_name: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -32,5 +33,6 @@ export const fetchUniqueDealTitles = cache(async () => {
   return deals.map((deal) => ({
     title: deal.deal_title,
     image: deal.image,
+    brandName: deal.brand_name,
   }));
 });

@@ -37,6 +37,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const brandNames = await fetchUniqueDealTitles();
+  // console.log(brandNames);
 
   return (
     <html lang="en">
