@@ -6,9 +6,8 @@ const DEALS_PER_PAGE = 12; // Set the number of deals per page
 export const revalidate = 10800; // revalidate the data at most every hour
 
 export default async function HomePage() {
-  // Assuming allDeals is your array of deals. Sort them if necessary
-  const sortedDeals = await fetchDeals(); // Replace with sortDeals(allDeals) if you have a sorting function
-  const pageNumber = 1; // Set the current page number. This might come from router query in a real scenario
+  const sortedDeals = await fetchDeals();
+  const pageNumber = 1;
 
   // Calculate the subset of deals to be displayed on the current page
   const initialDisplayDeals = sortedDeals.slice(

@@ -10,7 +10,7 @@ interface ProductCard {
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
-  const imageUrl = data.image || "@/public/android-chrome-192x192.png"; // Replace with actual default image path
+  const imageUrl = data.link_to_image || "@/public/android-chrome-192x192.png"; // Replace with actual default image path
 
   return (
     <Card
@@ -29,7 +29,9 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         {/* Date */}
         <div className="flex justify-end pt-4 pr-4">
           <p className="antialiased text-xs text-muted-foreground">
-            {data.createdAt ? data.createdAt.toLocaleDateString() : "N/A"}
+            {data.createdAt
+              ? new Date(data.createdAt).toLocaleDateString()
+              : "N/A"}
           </p>
         </div>
         {/* Image */}
@@ -79,7 +81,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Button>Grab Deal</Button>
+          <Button className="rounded-full">Grab Deal</Button>
         </Link>
       </div>
     </Card>

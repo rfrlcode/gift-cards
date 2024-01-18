@@ -1,10 +1,17 @@
 import Container from "@/components/ui/container";
 import { allBlogs } from "contentlayer/generated";
 import BlogList from "@/components/BlogList";
+import { Blog } from "contentlayer/generated";
 
-const POSTS_PER_PAGE = 5; // Set the number of deals per page
+const POSTS_PER_PAGE = 5;
+export const revalidate = 10800;
 
-// This function gets called at build time
+const sortPostsByDate = (posts: Blog[]): Blog[] => {
+  return posts.sort(
+    (a: Blog, b: Blog) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+};
 
 export const generateStaticParams = () => {
   const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE);
@@ -17,11 +24,11 @@ export const generateStaticParams = () => {
 
 export default function Page({ params }: { params: { page: string } }) {
   // Assuming allDeals is your array of deals. Sort them if necessary
-  const sortedDeals = allBlogs; // Replace with sortDeals(allDeals) if you have a sorting function
+  const sortedPosts = sortPostsByDate(allBlogs); // Replace with sortDeals(allDeals) if you have a sorting function
   const pageNumber = parseInt(params.page as string); // Set the current page number. This might come from router query in a real scenario
 
   // Calculate the subset of deals to be displayed on the current page
-  const initialDisplayDeals = sortedDeals.slice(
+  const initialDisplayDeals = sortedPosts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
     POSTS_PER_PAGE * pageNumber
   );
@@ -29,7 +36,7 @@ export default function Page({ params }: { params: { page: string } }) {
   // Calculate pagination details
   const pagination = {
     currentPage: pageNumber,
-    totalPages: Math.ceil(sortedDeals.length / POSTS_PER_PAGE),
+    totalPages: Math.ceil(sortedPosts.length / POSTS_PER_PAGE),
   };
   return (
     <div>
@@ -55,7 +62,7 @@ export default function Page({ params }: { params: { page: string } }) {
 
           <div className="flex flex-col gap-y-8 ">
             <BlogList
-              posts={sortedDeals}
+              posts={sortedPosts}
               initialDisplayPosts={initialDisplayDeals}
               pagination={pagination}
             />

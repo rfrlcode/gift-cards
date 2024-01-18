@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { columns } from "@/components/tasks/components/columns";
 import { DataTable } from "@/components/tasks/components/data-table";
 import Container from "@/components/ui/container";
@@ -17,17 +16,18 @@ export default async function Page({ params }: { params: { brand: string } }) {
   const { brand: brandName } = params;
   const allDeals = await fetchDeals();
 
-  // Filter deals for the given brand
-  const brandDeals = allDeals.filter((deal) =>
-    deal.brand_name.includes(brandName)
+  const brandDeals = allDeals.filter(
+    (deal) => deal !== null && deal.brand_name.includes(brandName)
   );
 
   // Get the image from the first deal, if available
   const firstDealImage =
-    brandDeals.length > 0 ? brandDeals[0].image : "/public/logo.svg";
+    brandDeals.length > 0 && brandDeals[0] !== null
+      ? brandDeals[0]?.link_to_image
+      : "/public/logo.svg";
 
   const brandTitle =
-    brandDeals.length > 0
+    brandDeals.length > 0 && brandDeals[0] !== null
       ? brandDeals[0].deal_title.replace("GiftCard", "").trim()
       : "Test";
 

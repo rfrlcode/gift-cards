@@ -1,13 +1,21 @@
 import Container from "@/components/ui/container";
 import { allBlogs } from "contentlayer/generated";
 import BlogList from "@/components/BlogList";
+import { Blog } from "contentlayer/generated";
 
-const POSTS_PER_PAGE = 5; // Set the number of deals per page
+const POSTS_PER_PAGE = 5;
+export const revalidate = 10800;
+
+const sortPostsByDate = (posts: Blog[]): Blog[] => {
+  return posts.sort(
+    (a: Blog, b: Blog) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+};
 
 export default function BlogHomePage() {
-  // Assuming allDeals is your array of deals. Sort them if necessary
-  const sortedPosts = allBlogs; // Replace with sortDeals(allDeals) if you have a sorting function
-  const pageNumber = 1; // Set the current page number. This might come from router query in a real scenario
+  const sortedPosts = sortPostsByDate(allBlogs);
+  const pageNumber = 1;
 
   // Calculate the subset of deals to be displayed on the current page
   const initialDisplayDeals = sortedPosts.slice(
