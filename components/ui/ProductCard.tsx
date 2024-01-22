@@ -27,7 +27,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       {/* Card Content */}
       <div className="flex-grow">
         {/* Date */}
-        <div className="flex justify-end pt-4 pr-4">
+        <div className="flex justify-end pt-2 pr-4">
           <p className="antialiased text-xs text-muted-foreground">
             {data.createdAt
               ? new Date(data.createdAt).toLocaleDateString()
@@ -35,21 +35,21 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           </p>
         </div>
         {/* Image */}
-        <div className="py-2 flex justify-center">
+        <div className="py-2 px-4 flex justify-center">
           <Image
             src={imageUrl}
             alt={
               data.deal_title ? `Image of ${data.deal_title}` : "Product image"
             }
-            width={200}
-            height={200}
+            width={525}
+            height={336}
             className="rounded-lg"
           />
         </div>
         {/* Description */}
         <div className="px-4 py-1">
-          <p className="font-semibold antialiased text-sm">{data.deal_title}</p>
-          <p className="antialiased text-green-600 font-semibold mt-2 text-lg">
+          <p className="font-medium text-sm text-gray-600">{data.deal_title}</p>
+          <p className="antialiased text-green-600 font-semibold mt-1 text-md">
             {data.is_price}
           </p>
           <p className="antialiased text-slate-400 font-semibold text-sm">
