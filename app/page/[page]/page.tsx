@@ -1,6 +1,7 @@
 import Container from "@/components/ui/container";
 import ProductList from "@/components/ProductList";
 import { fetchDeals } from "@/lib/utils";
+import { headerFont } from "@/lib/utils";
 
 const DEALS_PER_PAGE = 12; // Set the number of deals per page
 export const revalidate = 10800; // revalidate the data at most every hour
@@ -47,17 +48,21 @@ export default async function Page({ params }: { params: { page: string } }) {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  GiftCardDeals
+                  <span className={headerFont.className}>GiftCardDeals</span>
                 </h1>
                 <h2 className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Your One-Stop Destination for the Best Deals on Gift Cards!
+                  <span className={headerFont.className}>
+                    Your One-Stop Destination for the Best Deals on Gift Cards!
+                  </span>
                 </h2>
               </div>
             </div>
           </div>
           <div className="gap-y-8">
-            <p className="text-black-500 md:text-xl dark:text-gray-400 text-left">
-              <span className="border-b-2">Latest Deals</span>
+            <p className="text-black md:text-xl dark:text-gray-400 text-left">
+              <span className={`border-b-2 ${headerFont.className}`}>
+                Latest Deals
+              </span>
             </p>
           </div>
 

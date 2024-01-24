@@ -4,6 +4,7 @@ import { DataTable } from "@/components/tasks/components/data-table";
 import Container from "@/components/ui/container";
 import { fetchDeals } from "@/lib/utils";
 import { fetchUniqueDealTitles } from "@/lib/utils";
+import { headerFont } from "@/lib/utils";
 
 export const revalidate = 10800; // revalidate the data at most every hour
 
@@ -46,10 +47,12 @@ export default async function Page({ params }: { params: { brand: string } }) {
             <div className="flex flex-col space-y-4 justify-start items-start">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  {brandTitle}
+                  <span className={headerFont.className}>{brandTitle}</span>
                 </h1>
                 <h2 className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Find the best deals on {brandTitle} gift-cards!
+                  <span className={headerFont.className}>
+                    Find the best deals on {brandTitle} gift-cards!
+                  </span>
                 </h2>
               </div>
             </div>
@@ -59,7 +62,9 @@ export default async function Page({ params }: { params: { brand: string } }) {
       <div className="h-full flex-1 flex-col space-y-2 md:flex">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">Latest Deals</h2>
+            <h3 className="text-2xl font-bold tracking-tight">
+              <span className={headerFont.className}>Latest Deals</span>
+            </h3>
           </div>
         </div>
         <div className="max-w-xl">

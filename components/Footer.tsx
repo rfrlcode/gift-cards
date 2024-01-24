@@ -6,6 +6,7 @@ import Container from "./ui/container";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
+import { headerFont } from "@/lib/utils";
 
 const navigation = {
   more: [
@@ -30,20 +31,14 @@ export function Footer() {
               <span className="sr-only">GiftCardDeals.xyz Logo</span>
               <Image src="/logo.svg" alt="Logo" width={50} height={50} />
             </Link>
-            <p
-              className="max-w-xs text-sm"
-              style={{ color: "var(--muted-foreground)" }}
-            >
+            <p className={"max-w-xs text-sm"}>
               Your One-Stop Destination for the Best Deals on Gift Cards!
             </p>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-4 xl:col-span-2 xl:mt-0">
             <div>
-              <h3
-                className="text-sm font-semibold"
-                style={{ color: "var(--primary-foreground)" }}
-              >
-                Legal
+              <h3 className="text-sm font-semibold">
+                <span className={headerFont.className}>Legal</span>
               </h3>
               <ul role="list" className="mt-4 space-y-4">
                 {navigation.legal.map((item) => (
@@ -59,11 +54,8 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3
-                className="text-sm font-semibold"
-                style={{ color: "var(--primary-foreground)" }}
-              >
-                More
+              <h3 className="text-sm font-semibold">
+                <span className={headerFont.className}>More</span>
               </h3>
               <ul role="list" className="mt-4 space-y-4">
                 {navigation.more.map((item) => (
@@ -81,10 +73,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-row justify-between items-center mt-10 border-t border-border pt-8">
-          <p
-            className="text-sm leading-5"
-            style={{ color: "var(--muted-foreground)" }}
-          >
+          <p className={`text-sm leading-5 ${headerFont.className}`}>
             © {new Date().getFullYear()} GiftCardDeals.xyz
           </p>
           <Button
