@@ -3,10 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-// import type { MainNavItem, SidebarNavItem } from "@/types"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import {
   Accordion,
@@ -17,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Icons } from "@/components/icons";
 import { NavItem } from "@/types/nav";
 import { FooterItem } from "@/types/nav";
 import Image from "next/image";
@@ -35,7 +32,7 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
   const navItems = React.useMemo(() => {
     const items = footerItems ?? [];
     return items;
-  }, [mainNavItems, footerItems]);
+  }, [footerItems]);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
