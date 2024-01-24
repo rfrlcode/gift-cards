@@ -7,6 +7,7 @@ import Container from "@/components/ui/container";
 import Image from "next/image";
 import Link from "next/link";
 import Tag from "@/components/Tag";
+import { headerFont } from "@/lib/utils";
 
 interface DocPageProps {
   params: {
@@ -62,7 +63,7 @@ export default async function DocPage({ params }: DocPageProps) {
                   </dd>
                 </div>
               </dl>
-              <div className="bg-card">
+              <div className={`bg-card text-primary ${headerFont.className}`}>
                 <DocsPageHeader heading={doc.title} />
               </div>
             </div>
@@ -117,7 +118,7 @@ export default async function DocPage({ params }: DocPageProps) {
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/blog`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  className={`text-primary ${headerFont.className}`}
                   aria-label="Back to the blog"
                 >
                   &larr; Back to the blog

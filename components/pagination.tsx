@@ -2,6 +2,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { Button } from "./ui/button";
 
 export interface PaginationProps {
   totalPages: number;
@@ -29,67 +31,38 @@ export default function Pagination({
     }
   };
 
-  // Calculate pages to show
-  let startPage = Math.max(currentPage - 2, 1);
-  let endPage = Math.min(currentPage + 2, totalPages);
-  if (totalPages < 5) {
-    startPage = 1;
-    endPage = totalPages;
-  } else {
-    if (currentPage <= 3) {
-      endPage = 5;
-    } else if (currentPage >= totalPages - 2) {
-      startPage = totalPages - 4;
-    }
-  }
-  const pages = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i
-  );
-
   return (
-    <div
-      className="flex items-center justify-center md:space-x-6 mt-10 space-x-3"
-      style={{ color: "var(--foreground)" }}
-    >
+    <div className="flex items-center justify-center mt-10 space-x-2">
       <Link
-        className={cn(
-          "rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary",
-          currentPage === 1 ? "pointer-events-none bg-muted" : ""
-        )}
+        className={cn(currentPage === 1 ? "pointer-events-none" : "")}
         href={getHref(currentPage - 1)}
       >
-        Previous
+        <Button
+          variant="outline"
+          className={cn("h-8 w-8 p-0", !prevPage && "opacity-50")}
+          disabled={!prevPage}
+        >
+          <span className="sr-only">Go to previous page</span>
+          <ChevronLeftIcon className="h-4 w-4" />
+        </Button>
       </Link>
 
-      <nav
-        aria-label="Pagination"
-        className="relative z-0 inline-flex -space-x-px rounded-md"
-      >
-        {pages.map((p) => (
-          <Link
-            key={p}
-            className={cn(
-              "relative inline-flex items-center border border-border px-4 py-2 text-sm font-medium hover:bg-secondary",
-              p === currentPage ? "pointer-events-none bg-muted" : "",
-              p === startPage ? "rounded-l-md" : "",
-              p === endPage ? "rounded-r-md" : ""
-            )}
-            href={getHref(p)}
-          >
-            {p}
-          </Link>
-        ))}
-      </nav>
+      <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+        Page {currentPage} of {totalPages}
+      </div>
 
       <Link
-        className={cn(
-          "rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary",
-          currentPage >= totalPages ? "pointer-events-none bg-muted" : ""
-        )}
+        className={cn(currentPage >= totalPages ? "pointer-events-none" : "")}
         href={getHref(currentPage + 1)}
       >
-        Next
+        <Button
+          variant="outline"
+          className={cn("h-8 w-8 p-0", !nextPage && "opacity-50")}
+          disabled={!nextPage}
+        >
+          <span className="sr-only">Go to next page</span>
+          <ChevronRightIcon className="h-4 w-4" />
+        </Button>
       </Link>
     </div>
   );

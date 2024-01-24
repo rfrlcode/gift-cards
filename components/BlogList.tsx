@@ -6,6 +6,7 @@ import { PaginationProps } from "@/components/pagination";
 import Link from "next/link";
 import Tag from "@/components/Tag";
 import Image from "next/image";
+import { headerFont } from "@/lib/utils";
 
 // Adjust the type according to your data structure
 
@@ -65,24 +66,24 @@ export default function BlogList({
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">
                           <Link
                             href={href}
-                            className="text-gray-900 dark:text-gray-100"
+                            className={`text-gray-900 dark:text-gray-100 ${headerFont.className}`}
                           >
                             {post.title}
                           </Link>
                         </h2>
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-wrap  text-gray-500 dark:text-gray-400">
                           {post.tags?.map((tag: string) => (
                             <Tag key={tag} text={tag} />
                           ))}
                         </div>
                       </div>
-                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                      <div className="prose max-w-none font-light">
                         {post.summary}
                       </div>
                       <div className="text-base font-medium leading-6">
                         <Link
                           href={href}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className={`font-medium text-primary ${headerFont.className}`}
                           aria-label={`Read "${post.title}"`}
                         >
                           Read more &rarr;

@@ -3,6 +3,7 @@ import { allPages } from "contentlayer/generated";
 import { DocsPageHeader } from "@/components/page-header";
 import { Mdx } from "@/components/mdx-components";
 import type { Metadata } from "next";
+import { headerFont } from "@/lib/utils";
 
 interface DocPageProps {
   params: {
@@ -45,7 +46,9 @@ export default async function DocPage({ params }: DocPageProps) {
   // Assuming the metadata is set elsewhere in the framework using the generateMetadata function
   return (
     <main className="bg-background">
-      <div className="bg-card py-20 sm:py-40">
+      <div
+        className={`bg-card py-20 sm:py-40 text-primary ${headerFont.className}`}
+      >
         <DocsPageHeader heading={doc.title} />
       </div>
       <div className="mx-auto w-full lg:px-20 flex max-w-screen-md flex-col items-center p-8 sm:pt-20">

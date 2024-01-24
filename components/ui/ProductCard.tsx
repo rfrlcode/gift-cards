@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
 import { Deal } from "@/types/index";
 import { Button } from "@/components/ui/button";
@@ -48,7 +48,9 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         </div>
         {/* Description */}
         <div className="px-4 py-1">
-          <p className="font-medium text-sm text-gray-600">{data.deal_title}</p>
+          <p className="font-medium text-sm text-gray-600 dark:text-card-foreground">
+            {data.deal_title}
+          </p>
           <p className="antialiased text-green-600 font-semibold mt-1 text-md">
             {data.is_price}
           </p>
@@ -81,7 +83,9 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Button className="rounded-full">Grab Deal</Button>
+          <Button className="rounded-full bg-green-600">
+            <ArrowTopRightIcon />
+          </Button>
         </Link>
       </div>
     </Card>

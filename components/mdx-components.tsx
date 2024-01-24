@@ -6,6 +6,7 @@ import { FC, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import { Callout } from "@/components/callout";
 import { MdxCard } from "@/components/mdx-card";
+import { headerFont } from "@/lib/utils";
 
 type H1Props = HTMLAttributes<HTMLHeadingElement>;
 type H2Props = HTMLAttributes<HTMLHeadingElement>;
@@ -27,12 +28,13 @@ const components = {
   h2: ({ className, ...props }: H2Props) => (
     <h2
       className={cn(
-        "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+        `mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0 ${headerFont.className}`,
         className
       )}
       {...props}
     />
   ),
+
   h3: ({ className, ...props }: H3Props) => (
     <h3
       className={cn(
