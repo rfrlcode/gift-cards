@@ -7,17 +7,8 @@ import Container from "./ui/container";
 import Image from "next/image";
 import { CommandMenu } from "@/components/search";
 import React, { useMemo } from "react";
-
-export const navItems = [
-  {
-    name: "About Us",
-    slug: "about",
-  },
-  {
-    name: "Blog",
-    slug: "blog",
-  },
-];
+import { MobileNav } from "./mobile-nav";
+import { siteConfig } from "@/config/site";
 
 interface NavProps {
   brands: { title: string; image: string; brandName: string }[];
@@ -25,7 +16,6 @@ interface NavProps {
 
 export function Nav({ brands }: NavProps) {
   const selectedLayout = useSelectedLayoutSegment();
-  const memoizedNavItems = useMemo(() => navItems, []);
 
   const getLinkClass = (slug: string) =>
     `rounded-md px-3 py-2 text-sm font-medium`;
@@ -48,6 +38,10 @@ export function Nav({ brands }: NavProps) {
       <div className="border-b border-border bg-background/75 backdrop-blur-lg">
         <div className="flex h-14 items-center justify-between">
           <div className="flex items-center">
+            <MobileNav
+              mainNavItems={siteConfig.mainNav}
+              footerItems={siteConfig.footerNav}
+            />
             <Link href="/">
               <Image src="/logo.svg" alt="Logo" width={50} height={50} />
             </Link>
@@ -57,14 +51,14 @@ export function Nav({ brands }: NavProps) {
               className="relative hidden lg:block"
             >
               <NavigationMenuPrimitive.List className="flex flex-row space-x-2 p-4">
-                {memoizedNavItems.map(({ name, slug }) => (
-                  <NavigationMenuPrimitive.Item key={slug} asChild>
+                {siteConfig.mainNav.map(({ title, href }) => (
+                  <NavigationMenuPrimitive.Item key={href} asChild>
                     <Link
-                      id={`nav-${slug}`}
-                      href={`/${slug}`}
-                      className={getLinkClass(slug)}
+                      id={`nav-${href}`}
+                      href={`${href}`}
+                      className={getLinkClass(href)}
                     >
-                      {name}
+                      {title}
                     </Link>
                   </NavigationMenuPrimitive.Item>
                 ))}
