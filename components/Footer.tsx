@@ -29,7 +29,7 @@ export function Footer() {
           <div className="space-y-8">
             <Link href="/">
               <span className="sr-only">GiftCardDeals.xyz Logo</span>
-              <Image src="/logo.svg" alt="Logo" width={50} height={50} />
+              <Image src="/logo.png" alt="Logo" width={50} height={50} />
             </Link>
             <p className={"max-w-xs text-sm"}>
               Your One-Stop Destination for the Best Deals on Gift Cards!

@@ -53,7 +53,7 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/">
-              <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+              <Image src="/logo.png" alt="Logo" width={40} height={40} />
             </Link>
             <span className={`ml-2 text-lg ${headerFont.className}`}>
               GiftCard<span className="text-primary">Deals</span>

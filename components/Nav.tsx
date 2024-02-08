@@ -43,7 +43,7 @@ export function Nav({ brands }: NavProps) {
               footerItems={siteConfig.footerNav}
             />
             <Link href="/">
-              <Image src="/logo.svg" alt="Logo" width={50} height={50} />
+              <Image src="/logo.png" alt="Logo" width={50} height={50} />
             </Link>
 
             <NavigationMenuPrimitive.Root
