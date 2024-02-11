@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { fetchUniqueDealTitles } from "@/lib/utils";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,6 +49,12 @@ export default async function RootLayout({
           <Footer />
         </ThemeProvider>
       </body>
+      <Script
+        strategy="lazyOnload"
+        async
+        src="https://us.umami.is/script.js"
+        data-website-id="ca176b6f-ce5c-463f-a69c-b16d7b32b621"
+      />
     </html>
   );
 }
