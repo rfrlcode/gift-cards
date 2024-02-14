@@ -11,7 +11,7 @@ export interface Deal {
   short_offer?: string | undefined;
   BrandName: string;
   seller_name: string | undefined;
-  expiration_date?: string;
+  expiration_date?: Date;
   discount_code?: string;
   is_price: string;
   was_price?: string | undefined;

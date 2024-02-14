@@ -78,6 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
     deal_title,
     link_to_image = DEFAULT_IMAGE_PATH,
     createdAt,
+    expiration_date,
     short_offer,
     is_price,
     was_price,
@@ -88,6 +89,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const formattedDate = createdAt
     ? new Date(createdAt).toLocaleDateString()
     : "N/A";
+  const currentDate = new Date();
+  const expirationDate = expiration_date
+    ? new Date(expiration_date)
+    : new Date();
+  const isExpired = expirationDate < currentDate;
 
   return (
     <Card
@@ -148,16 +154,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
       <div className="flex justify-between items-end px-4 py-4">
         <p className="antialiased text-xs text-gray-600">{seller_name}</p>
-        <Link
-          href={link_to_deal}
-          passHref
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button className="rounded-full bg-green-600">
-            <ArrowTopRightIcon />
-          </Button>
-        </Link>
+        {isExpired ? (
+          // Display "Expired" in red when the deal is expired
+          <p className="px-2 py-1 bg-pink-100 text-red-500 text-xs font-semibold rounded">
+            Expired
+          </p>
+        ) : (
+          // Link component with Button for non-expired deals
+          <Link
+            href={link_to_deal}
+            passHref
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="rounded-full bg-green-600">
+              <ArrowTopRightIcon />
+            </Button>
+          </Link>
+        )}
       </div>
     </Card>
   );
