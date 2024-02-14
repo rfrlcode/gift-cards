@@ -156,7 +156,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         <p className="antialiased text-xs text-gray-600">{seller_name}</p>
         {isExpired ? (
           // Display "Expired" in red when the deal is expired
-          <p className="px-2 py-1 bg-pink-100 text-red-500 text-xs font-semibold rounded">
+          <p className="px-2 py-1 bg-[#FFEDEA] text-[#930009] text-xs font-semibold rounded">
             Expired
           </p>
         ) : (

@@ -85,23 +85,39 @@ export const columns: ColumnDef<Deal | null>[] = [
   {
     accessorKey: "link_to_deal",
     header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
-    cell: ({ row }) => (
-      <div className="">
-        <Link
-          href={row.getValue("link_to_deal")}
-          passHref
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button>
-            <span className="md:inline hidden">Grab Deal</span>
-            <span className="md:hidden">
-              <ArrowTopRightIcon />
-            </span>
-          </Button>
-        </Link>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const expirationDate = row.original?.expiration_date;
+      const currentDate = new Date();
+      const isExpired = expirationDate
+        ? new Date(expirationDate) < currentDate
+        : false;
+
+      return (
+        <div className="">
+          {isExpired ? (
+            <div className="flex">
+              <p className="px-2 py-1 bg-[#FFEDEA] text-[#930009] text-xs font-semibold rounded">
+                Expired
+              </p>
+            </div>
+          ) : (
+            <Link
+              href={row.getValue("link_to_deal")}
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button>
+                <span className="md:inline hidden">Grab Deal</span>
+                <span className="md:hidden">
+                  <ArrowTopRightIcon />
+                </span>
+              </Button>
+            </Link>
+          )}
+        </div>
+      );
+    },
     enableSorting: false,
     enableHiding: false,
   },
