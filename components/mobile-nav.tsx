@@ -115,7 +115,7 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
           </div>
         </ScrollArea>
 
-        <div className="flex justify-center items-center space-x-2 bg-white">
+        <div className="flex justify-center items-center space-x-2">
           <Socials />
         </div>
       </SheetContent>
