@@ -20,6 +20,8 @@ import { FooterItem } from "@/types/nav";
 import Image from "next/image";
 import { headerFont } from "@/lib/utils";
 
+import { Socials } from "./socials";
+
 interface MobileNavProps {
   mainNavItems?: NavItem[];
   footerItems?: FooterItem[];
@@ -45,7 +47,7 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pl-1 pr-0">
+      <SheetContent side="left" className="pl-1 pr-0 rounded-r-md">
         <div className="px-7">
           <Link
             href="/"
@@ -62,7 +64,7 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
           </Link>
         </div>
 
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+        <ScrollArea className="my-4 h-[calc(100vh-10rem)] pb-10 pl-6">
           {mainNavItems?.map((navItem, index) => (
             <div key={index} className="pl-1 pr-7">
               <MobileLink
@@ -112,6 +114,10 @@ export function MobileNav({ mainNavItems, footerItems }: MobileNavProps) {
             </Accordion>
           </div>
         </ScrollArea>
+
+        <div className="flex justify-center items-center space-x-2 bg-white">
+          <Socials />
+        </div>
       </SheetContent>
     </Sheet>
   );
