@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "about",
   ].map((route) => ({
     url: `${siteUrl}/${route}`,
-    lastModified: new Date().toISOString().split("T")[0],
+    lastModified: new Date(),
   }));
 
   return [...routes, ...blogRoutes];
