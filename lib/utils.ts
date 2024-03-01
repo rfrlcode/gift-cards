@@ -22,18 +22,28 @@ if (process.env.NODE_ENV === "development") global.notionClient = notionClient;
 export default notionClient;
 
 export const getPages = cache(async () => {
-  // Query the database to get the page IDs
-  const queryResponse = await notionClient.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
-    sorts: [
-      {
-        property: "Created Time",
-        direction: "descending",
-      },
-    ],
-  });
+  let allPages: any[] = [];
+  let startCursor: string | undefined = undefined;
 
-  return queryResponse.results;
+  do {
+    // When querying the database, ensure start_cursor is explicitly set to undefined, never null
+    const queryResponse = await notionClient.databases.query({
+      database_id: process.env.NOTION_DATABASE_ID!,
+      start_cursor: startCursor || undefined, // Coalesce null or undefined to undefined
+      sorts: [
+        {
+          property: "Created Time",
+          direction: "descending",
+        },
+      ],
+    });
+
+    allPages.push(...queryResponse.results);
+    // Ensure startCursor is set to undefined if queryResponse.next_cursor is null
+    startCursor = queryResponse.next_cursor || undefined;
+  } while (startCursor);
+
+  return allPages;
 });
 
 export const fetchDeals = cache(async () => {
