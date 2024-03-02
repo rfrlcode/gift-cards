@@ -1,15 +1,25 @@
 import { MetadataRoute } from "next";
 import { allBlogs } from "contentlayer/generated";
 import siteMetadata from "@/content/siteMetadata";
+import { fetchUniqueDealTitles } from "@/lib/utils";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Assuming this function is defined in the same or accessible file
+export const brands = async () => {
+  const allBrands = await fetchUniqueDealTitles(); // Fetch all unique deal titles
+  return allBrands.map((brand) => ({ brand: brand.brandName }));
+};
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = siteMetadata.siteUrl;
+
+  // Generate blog routes
   const blogRoutes = allBlogs.map((post) => ({
     url: `${siteUrl}${post.slug}`,
     lastModified: post.lastmod || post.date,
   }));
 
-  const routes = [
+  // Generate static routes
+  const staticRoutes = [
     "",
     "blog",
     "terms",
@@ -21,5 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  return [...routes, ...blogRoutes];
+  // Fetch and generate brand routes
+  const brandRoutes = (await brands()).map((brand) => ({
+    url: `${siteUrl}/brands/${brand.brand}`,
+    lastModified: new Date(), // You can set a specific last modified date if available
+  }));
+
+  // Combine all routes
+  return [...staticRoutes, ...blogRoutes, ...brandRoutes];
 }
