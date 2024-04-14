@@ -1,4 +1,3 @@
-import { Client } from "@notionhq/client";
 import { cache } from "react";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
