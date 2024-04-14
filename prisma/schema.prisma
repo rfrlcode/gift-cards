@@ -26,5 +26,6 @@ model Deal {
   was_price       String?
   link_to_image   String
   link_to_deal    String
+  social_posted   String?
   createdAt       DateTime? @default(now())
 }
