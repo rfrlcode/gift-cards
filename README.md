@@ -20,8 +20,6 @@ I wanted it to be nearly as feature-rich as popular blogging templates like [bea
 - [Contentlayer](https://www.contentlayer.dev/) to manage content logic
 - Easy styling customization with [Tailwind 3.0](https://tailwindcss.com/blog/tailwindcss-v3) and primary color attribute
 - [MDX - write JSX in markdown documents!](https://mdxjs.com/)
-- Near perfect lighthouse score - [Lighthouse report](https://www.webpagetest.org/result/230805_BiDcBQ_4H7)
-- Lightweight, 85kB first load JS
 - Mobile-friendly view
 - Light and dark theme
 - Font optimization with [next/font](https://nextjs.org/docs/app/api-reference/components/font)
